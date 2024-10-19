@@ -1,0 +1,40 @@
+{% extends "./app.html" %}
+
+{% block title %} Tarea {% endblock %}
+
+{% block body %}
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
+    <title>App 1</title>
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="card">
+            <div class="content">
+                <h2>T</h2>
+                <br><br>
+                    <h3>Tarea: {{Tareas.Title}}</h3>
+                <br>
+                <form action="/app1/ActualizarTarea/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtTitle" name="txtTitle" value="{{Tareas.Title}}" class="form-control" placeholder="Title" 
+                        minlength="5" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="txtDescrip2" id="txtDescrip" name="txtDescrip" class="form-control"  
+                        maxlength="200" readonly>{{Tareas.Descrip}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="danger" class="btn">Back</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>   
+</body>
+{% endblock %}

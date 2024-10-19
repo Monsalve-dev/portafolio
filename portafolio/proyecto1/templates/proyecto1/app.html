@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
+    <title>App 1</title>
+</head>
+
+<body>
+    
+    <div class="container">
+        {% block body %}
+        <div class="card">
+            <div class="portada">
+                <h2 class="texto">Agregar tarea <br>+</h2>
+            </div>
+            <div class="content">
+                <h2>G</h2>
+                <br><br>
+                    <h3>Gestion de tareas</h3>
+                <br>
+               <form action="registrarTarea/" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="txtTitle" name="txtTitle" class="form-control" placeholder="Title" 
+                    minlength="7" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="txtDescrip" name="txtDescrip" class="form-control descrip" placeholder="Description" 
+                    maxlength="200"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Registrar</button>
+                </div>
+                <a href="/" class="btn">Salir</a>
+              </form>
+            </div>
+        </div>
+        <div class="card2">
+            <div class="content">
+                <h2>L</h2>
+                <br><br>
+                    <h3>Listado de tareas</h3>
+                <br>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped ">
+                            <thead>
+                                <tr>
+                                    <th class="th-dos">&nbsp Tarea</th>
+
+                                </tr>
+                            </thead>
+
+                        <tbody>
+                            {% for c in Tareas %}
+                            <tr>
+                                <td>{{c.Title}}</td>
+                                <td><a href="leerTarea/{{c.Title}}" class="btn-success">Read</a></td>
+                                <td ><a href="actualizarTarea/{{c.Title}}" class="btn-info">Update</a></td>
+                                <td ><a href="eliminarTarea/{{c.Title}}" class="btn-danger  btnEliminacion">Delete</a></td>                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> 
+    {% endblock %}  
+</body>
+</html>
